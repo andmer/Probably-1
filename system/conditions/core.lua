@@ -114,7 +114,7 @@ end)
 ProbablyEngine.condition.register("debuff.duration", function(target, spell)
     local debuff,_,expires,caster = UnitDebuff(target, spell)
     if not not debuff and (caster == 'player' or caster == 'pet') then
-    return (expires - (GetTime()-(ProbablyEngine.lag/1000)))
+    return (expires - GetTime())
     end
     return 0
 end)
@@ -122,7 +122,7 @@ end)
 ProbablyEngine.condition.register("buff.duration", function(target, spell)
     local buff,_,expires,caster = UnitBuff(target, spell)
     if not not buff and (caster == 'player' or caster == 'pet') then
-    return (expires - (GetTime()-(ProbablyEngine.lag/1000)))
+    return (expires - GetTime())
     end
     return 0
 end)
