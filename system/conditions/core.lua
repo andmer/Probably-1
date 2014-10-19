@@ -847,14 +847,13 @@ ProbablyEngine.condition.register("falling", function()
     return IsFalling()
 end)
 
-ProbablyEngine.condition.register("modifier.timeout", function(_, spell, time)
+ProbablyEngine.condition.register("timeout", function(args)
+    local time, spell = strsplit(",", args, 2)
+    print(time, spell)
     if ProbablyEngine.timeout.check(spell) then
-    return ProbablyEngine.timeout.check(spell)
-    else
-    ProbablyEngine.timeout.set(spell, function()
-        print(spell .. 'finished')
-    end, tonumber(time))
+        return false
     end
+    ProbablyEngine.timeout.set(spell, tonumber(time), function()print('done')end)
     return true
 end)
 
