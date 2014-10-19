@@ -8,12 +8,14 @@ end)
 
 -- SPEC ID 251
 ProbablyEngine.rotation.register(251, {
+
+  { "#Potion of Mogu Power", "modifier.cooldowns", 'player' },
   
   -- Blood Tap
   {{
     { "Blood Tap", "player.runes(unholy).count = 0" },
     { "Blood Tap", "player.runes(frost).count = 0" },
-    { "Blood Tap", "player.runes(blood).count = 0" },
+    { "Blood Tap", "player.runes(death).count = 0" },
   } , {
     "player.buff(Blood Charge).count >= 5",
     "player.runes(death).count = 0"
@@ -39,7 +41,6 @@ ProbablyEngine.rotation.register(251, {
   { "Empower Rune Weapon", {
     "modifier.cooldowns", 
     "player.runicpower <= 70", 
-    "player.runes(blood).count = 0", 
     "player.runes(unholy).count = 0", 
     "player.runes(frost).count = 0", 
     "player.runes(death).count = 0",
@@ -51,12 +52,12 @@ ProbablyEngine.rotation.register(251, {
     {{
       { "Plague Leech", "player.runes(unholy).count = 0" },
       { "Plague Leech", "player.runes(frost).count = 0" },
-      { "Plague Leech", "player.runes(blood).count = 0" },
+      { "Plague Leech", "player.runes(death).count = 0" },
     }, "player.spell(Outbreak).cooldown = 0" },
     {{
       { "Plague Leech", "player.runes(unholy).count = 0" },
       { "Plague Leech", "player.runes(frost).count = 0" },
-      { "Plague Leech", "player.runes(blood).count = 0" },
+      { "Plague Leech", "player.runes(death).count = 0" },
     }, "target.debuff(Blood Plague).duration < 6" },
   } , {
     "target.debuff(Blood Plague)",
@@ -67,7 +68,7 @@ ProbablyEngine.rotation.register(251, {
     "target.debuff(Blood Plague).duration < 3", 
   }, "target" },
   { "Howling Blast", "target.debuff(Frost Fever).duration < 3" },
-  { "Plague Strike", "target.debuff(Blood Plague).duration < 3" },
+  { "Plague Strike", { "target.debuff(Blood Plague).duration < 3", "player.runes(unholy).count >= 1" } },
   { "Unholy Blight", (function() return UnitsAroundUnit('target', 10) >= 4 end) },
   { "Death and Decay", "modifier.shift", "target.ground" },
 
