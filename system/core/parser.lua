@@ -330,7 +330,12 @@ ProbablyEngine.parser.table = function(spellTable, fallBackTarget)
         return false
       elseif eventType == "bagItem" then
         if stopCasting then SpellStopCasting() end
-        UseItemByName(itemName, target)
+        if not ProbablyEngine.timeout.check(itemName) then
+          ProbablyEngine.timeout.set(itemName, 0.15, function()
+            print('USNG ITEM!')
+            UseItemByName(itemName, target)
+          end)
+        end
         ProbablyEngine.actionLog.insert('Use Bag Item', itemName, itemTexture, target)
         return false
       elseif event == "pause" then
