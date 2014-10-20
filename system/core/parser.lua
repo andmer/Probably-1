@@ -332,7 +332,6 @@ ProbablyEngine.parser.table = function(spellTable, fallBackTarget)
         if stopCasting then SpellStopCasting() end
         if not ProbablyEngine.timeout.check(itemName) then
           ProbablyEngine.timeout.set(itemName, 0.15, function()
-            print('USNG ITEM!')
             UseItemByName(itemName, target)
           end)
         end
